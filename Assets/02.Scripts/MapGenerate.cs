@@ -239,11 +239,14 @@ public class MapGenerate : MonoBehaviour
         {
             for(int y=rect.y; y<rect.height+rect.y; y++)
             {
-                if(rect.x==x||y==rect.y)
+                if (rect.x == x||rect.y==y||rect.width+rect.x-1==x||rect.height+rect.y-1==y)
                 {
                     tilemap.SetTile(new Vector3Int(x - mapSize.x / 2, y - mapSize.y / 2, 0), tiles[2]);
                 }
-                tilemap.SetTile(new Vector3Int(x-mapSize.x/2,y-mapSize.y/2,0),tiles[0]);
+                else
+                {
+                    tilemap.SetTile(new Vector3Int(x - mapSize.x / 2, y - mapSize.y / 2, 0), tiles[0]);
+                }
             }
         }
     }
