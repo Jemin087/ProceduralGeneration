@@ -24,7 +24,7 @@ public class Node
     }
 }
 
-public class BSP : MonoBehaviour
+public class MapGenerate : MonoBehaviour
 {
     [SerializeField]
     Vector2Int mapSize;    //맵 크기
@@ -57,10 +57,11 @@ public class BSP : MonoBehaviour
     Tile backgroundTile;          //타일맵 테스트중 
 
     [SerializeField]
-    Tile[] roomTiles;           //랜덤한 방타일
+    Tile[] tiles;           //랜덤한 방타일
 
     public bool debugflag=false;
     Node root;
+
 
 
     private void Start()
@@ -81,7 +82,8 @@ public class BSP : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Alpha1))
             {
-                 DrawMap(0, 0);
+                DrawTileBackGround();
+                // DrawMap(0, 0);
             }
             else if(Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -94,10 +96,6 @@ public class BSP : MonoBehaviour
             else if(Input.GetKeyDown(KeyCode.Alpha4))
             {
                 GenerateLoad(root,0);
-            }
-            else if(Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                FillTesting();
             }
         }
     }
@@ -124,15 +122,16 @@ public class BSP : MonoBehaviour
             tree.leftNode = new Node(new RectInt(tree.nodeRect.x, tree.nodeRect.y, split, tree.nodeRect.height));
             tree.rightNode = new Node(new RectInt(tree.nodeRect.x + split, tree.nodeRect.y, tree.nodeRect.width - split, tree.nodeRect.height));
 
-            DrawLine(new Vector2(tree.nodeRect.x + split, tree.nodeRect.y), new Vector2(tree.nodeRect.x + split, tree.nodeRect.y + tree.nodeRect.height));
-           
+            //DrawLine(new Vector2(tree.nodeRect.x + split, tree.nodeRect.y), new Vector2(tree.nodeRect.x + split, tree.nodeRect.y + tree.nodeRect.height));
+            DrawTileWall(new Vector2Int(tree.nodeRect.x + split, tree.nodeRect.y), new Vector2Int(tree.nodeRect.x + split, tree.nodeRect.y + tree.nodeRect.height));
         }
         else        //세로 
         {
             tree.leftNode = new Node(new RectInt(tree.nodeRect.x, tree.nodeRect.y, tree.nodeRect.width,split));
             tree.rightNode = new Node(new RectInt(tree.nodeRect.x, tree.nodeRect.y + split, tree.nodeRect.width, tree.nodeRect.height - split));
 
-             DrawLine(new Vector2(tree.nodeRect.x, tree.nodeRect.y + split), new Vector2(tree.nodeRect.x + tree.nodeRect.width, tree.nodeRect.y + split));
+             //DrawLine(new Vector2(tree.nodeRect.x, tree.nodeRect.y + split), new Vector2(tree.nodeRect.x + tree.nodeRect.width, tree.nodeRect.y + split));
+             DrawTileWall(new Vector2Int(tree.nodeRect.x, tree.nodeRect.y + split), new Vector2Int(tree.nodeRect.x + tree.nodeRect.width, tree.nodeRect.y + split));
         }
         tree.leftNode.parNode = tree;
         tree.rightNode.parNode = tree;
@@ -140,19 +139,19 @@ public class BSP : MonoBehaviour
         Divide(tree.rightNode,n + 1);
     }
 
-    void DrawLine(Vector2 from, Vector2 to)
-    {
-        LineRenderer line = Instantiate(this.line).GetComponent<LineRenderer>();
-        line.SetPosition(0, from - mapSize / 2);
-        line.SetPosition(1, to - mapSize / 2);
-    }
+    //void DrawLine(Vector2 from, Vector2 to)
+    //{
+    //    LineRenderer line = Instantiate(this.line).GetComponent<LineRenderer>();
+    //    line.SetPosition(0, from - mapSize / 2);
+    //    line.SetPosition(1, to - mapSize / 2);
+    //}
 
-     void DrawLine_2(Vector2 from, Vector2 to)
-    {
-        LineRenderer line = Instantiate(this.line2).GetComponent<LineRenderer>();
-        line.SetPosition(0, from - mapSize / 2);
-        line.SetPosition(1, to - mapSize / 2);
-    }
+    //void DrawLine_2(Vector2 from, Vector2 to)
+    //{
+    //    LineRenderer line = Instantiate(this.line2).GetComponent<LineRenderer>();
+    //    line.SetPosition(0, from - mapSize / 2);
+    //    line.SetPosition(1, to - mapSize / 2);
+    //}
 
 
     RectInt GenerateRoom(Node tree,int n) //나누어준 사각형안에 방을 생성해줍니다.
@@ -170,7 +169,7 @@ public class BSP : MonoBehaviour
             int y = rect.y + Random.Range(1, rect.height - height);
 
             rect = new RectInt(x, y, width, height);
-            DrawRectangle(rect);
+            //DrawRectangle(rect);
             DrawTileRoom(rect);
         }
         else
@@ -190,23 +189,48 @@ public class BSP : MonoBehaviour
         Vector2Int leftCenter=tree.leftNode.center;
         Vector2Int rightCenter=tree.rightNode.center;
 
-        DrawLine_2(new Vector2(leftCenter.x,leftCenter.y),new Vector2(rightCenter.x,leftCenter.y));
-        DrawLine_2(new Vector2(rightCenter.x,leftCenter.y),new Vector2(rightCenter.x,rightCenter.y));
+        //DrawLine_2(new Vector2(leftCenter.x,leftCenter.y),new Vector2(rightCenter.x,leftCenter.y));
+       // DrawLine_2(new Vector2(rightCenter.x,leftCenter.y),new Vector2(rightCenter.x,rightCenter.y));
+        DrawTileLine(new Vector2Int(leftCenter.x, leftCenter.y), new Vector2Int(rightCenter.x, leftCenter.y));
+        DrawTileLine(new Vector2Int(rightCenter.x, leftCenter.y), new Vector2Int(rightCenter.x, rightCenter.y));
 
         GenerateLoad(tree.leftNode,n+1);
         GenerateLoad(tree.rightNode,n+1);
 
     }
-    void DrawRectangle(RectInt rect)
+    //void DrawRectangle(RectInt rect)
+    //{
+    //    LineRenderer line=Instantiate(roomLine).GetComponent<LineRenderer>();
+    //    line.SetPosition(0,new Vector2(rect.x,rect.y)-mapSize/2);
+    //    line.SetPosition(1,new Vector2(rect.x+rect.width,rect.y)-mapSize/2);
+    //    line.SetPosition(2,new Vector2(rect.x+rect.width,rect.y+rect.height)-mapSize/2);
+    //    line.SetPosition(3,new Vector2(rect.x,rect.y+rect.height)-mapSize/2);
+    //}
+
+    void DrawTileLine(Vector2Int from,Vector2Int to)
     {
-        LineRenderer line=Instantiate(roomLine).GetComponent<LineRenderer>();
-        line.SetPosition(0,new Vector2(rect.x,rect.y)-mapSize/2);
-        line.SetPosition(1,new Vector2(rect.x+rect.width,rect.y)-mapSize/2);
-        line.SetPosition(2,new Vector2(rect.x+rect.width,rect.y+rect.height)-mapSize/2);
-        line.SetPosition(3,new Vector2(rect.x,rect.y+rect.height)-mapSize/2);
+    
+        for(int x=from.x; x<to.x; x++)
+        {
+            tilemap.SetTile(new Vector3Int(x - mapSize.x / 2, to.y - mapSize.y / 2, 0), tiles[1]);
+        }
+        for (int y = from.y; y < to.y; y++)
+        {
+            tilemap.SetTile(new Vector3Int(to.x - mapSize.x / 2, y - mapSize.y / 2, 0), tiles[1]);
+        }
 
-       
+    }
 
+    void DrawTileWall(Vector2Int from, Vector2Int to)
+    {
+        for (int x = from.x; x < to.x; x++)
+        {
+            tilemap.SetTile(new Vector3Int(x - mapSize.x / 2, to.y - mapSize.y / 2, 0), tiles[2]);
+        }
+        for (int y = from.y; y < to.y; y++)
+        {
+            tilemap.SetTile(new Vector3Int(to.x - mapSize.x / 2, y - mapSize.y / 2, 0), tiles[2]);
+        }
     }
 
     void DrawTileRoom(RectInt rect)
@@ -215,20 +239,17 @@ public class BSP : MonoBehaviour
         {
             for(int y=rect.y; y<rect.height+rect.y; y++)
             {
-                tilemap.SetTile(new Vector3Int(x-mapSize.x/2,y-mapSize.y/2,0),roomTiles[0]);
+                if(rect.x==x||y==rect.y)
+                {
+                    tilemap.SetTile(new Vector3Int(x - mapSize.x / 2, y - mapSize.y / 2, 0), tiles[2]);
+                }
+                tilemap.SetTile(new Vector3Int(x-mapSize.x/2,y-mapSize.y/2,0),tiles[0]);
             }
         }
     }
 
-    void FillTesting()
-    {
-        //lineRenderer.SetPosition(0, new Vector2(x, y) - mapSize / 2);
-        //lineRenderer.SetPosition(1, new Vector2(x+mapSize.x, y) - mapSize / 2);
-        //lineRenderer.SetPosition(2, new Vector2(x+mapSize.x, y+mapSize.y) - mapSize / 2);
-        //lineRenderer.SetPosition(3, new Vector2(x, y+mapSize.y) - mapSize / 2);
-        
-
-        
+    void DrawTileBackGround()
+    {      
         for(int x=-mapSize.x/2; x<mapSize.x/2; x++)
         {
             for(int y=-mapSize.y/2; y<mapSize.y/2; y++)

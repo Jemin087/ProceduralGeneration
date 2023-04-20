@@ -498,7 +498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1544394977}
-  - component: {fileID: 1544394976}
+  - component: {fileID: 1544394978}
   m_Layer: 0
   m_Name: BSP Manager
   m_TagString: Untagged
@@ -506,31 +506,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1544394976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544394975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79c7897ca7fc1ed488753dcdb1e69dc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapSize: {x: 64, y: 64}
-  minDevideRate: 0.4
-  maxDevideRate: 0.6
-  line: {fileID: 8403151261871148946, guid: cafc8617b19be94459db4d676a6289ac, type: 3}
-  line2: {fileID: 8403151261871148946, guid: 1c12db3af06167d498983ac651723b68, type: 3}
-  map: {fileID: 1127055227102644996, guid: 3bc4e52db4d1c4e4ea779a59f08bdd60, type: 3}
-  roomLine: {fileID: 8403151261871148946, guid: d85eecbfa5544a3429ba7b57640ca6ee, type: 3}
-  maxDepth: 4
-  tilemap: {fileID: 749150377}
-  backgroundTile: {fileID: 11400000, guid: ff4b194f9be0a4645a526d03b057a531, type: 2}
-  roomTiles:
-  - {fileID: 11400000, guid: dd468a60702244f48a6e429107f5729c, type: 2}
-  debugflag: 1
 --- !u!4 &1544394977
 Transform:
   m_ObjectHideFlags: 0
@@ -546,6 +521,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1544394978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544394975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79c7897ca7fc1ed488753dcdb1e69dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapSize: {x: 128, y: 128}
+  minDevideRate: 0.4
+  maxDevideRate: 0.6
+  line: {fileID: 8403151261871148946, guid: cafc8617b19be94459db4d676a6289ac, type: 3}
+  line2: {fileID: 8403151261871148946, guid: 1c12db3af06167d498983ac651723b68, type: 3}
+  map: {fileID: 1127055227102644996, guid: 3bc4e52db4d1c4e4ea779a59f08bdd60, type: 3}
+  roomLine: {fileID: 8403151261871148946, guid: d85eecbfa5544a3429ba7b57640ca6ee, type: 3}
+  maxDepth: 4
+  tilemap: {fileID: 749150377}
+  backgroundTile: {fileID: 11400000, guid: ff4b194f9be0a4645a526d03b057a531, type: 2}
+  tiles:
+  - {fileID: 11400000, guid: dd468a60702244f48a6e429107f5729c, type: 2}
+  - {fileID: 11400000, guid: 7d346b1cdf04cf747b7755c2bfe2fae8, type: 2}
+  - {fileID: 11400000, guid: e71f82993259fd74db934d70ecc24a55, type: 2}
+  debugflag: 1
 --- !u!1 &1813116553
 GameObject:
   m_ObjectHideFlags: 0
