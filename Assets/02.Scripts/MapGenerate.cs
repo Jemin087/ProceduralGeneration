@@ -67,12 +67,14 @@ public class MapGenerate : MonoBehaviour
     private void Start()
     {
         root  = new Node(new RectInt(0, 0, mapSize.x, mapSize.y));
-      
-        //DrawMap(0, 0);  //1.한 공간을 만들어준다
-        //Divide(root, 0);    //2. 만들어준 공간을 재귀함수를 이용하여 maxDepth에 도달할때까지 나눈다
-        //GenerateRoom(root,0); //3.나누어진 공간안에 방을 만드는 함수
-        //GenerateLoad(root,0); //4.노드를 거슬러올라가면서 길을 이어주는함수
-        //FillTesting(); //테스트중
+
+        if (!debugflag)
+        {
+            DrawTileBackGround();
+            Divide(root, 0);
+            GenerateRoom(root, 0);
+            GenerateLoad(root, 0);
+        }
     }
 
    
@@ -83,7 +85,7 @@ public class MapGenerate : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Alpha1))
             {
                 DrawTileBackGround();
-                // DrawMap(0, 0);
+                 //DrawMap(0, 0);
             }
             else if(Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -139,19 +141,19 @@ public class MapGenerate : MonoBehaviour
         Divide(tree.rightNode,n + 1);
     }
 
-    //void DrawLine(Vector2 from, Vector2 to)
-    //{
-    //    LineRenderer line = Instantiate(this.line).GetComponent<LineRenderer>();
-    //    line.SetPosition(0, from - mapSize / 2);
-    //    line.SetPosition(1, to - mapSize / 2);
-    //}
+    void DrawLine(Vector2 from, Vector2 to)
+    {
+        LineRenderer line = Instantiate(this.line).GetComponent<LineRenderer>();
+        line.SetPosition(0, from - mapSize / 2);
+        line.SetPosition(1, to - mapSize / 2);
+    }
 
-    //void DrawLine_2(Vector2 from, Vector2 to)
-    //{
-    //    LineRenderer line = Instantiate(this.line2).GetComponent<LineRenderer>();
-    //    line.SetPosition(0, from - mapSize / 2);
-    //    line.SetPosition(1, to - mapSize / 2);
-    //}
+    void DrawLine_2(Vector2 from, Vector2 to)
+    {
+        LineRenderer line = Instantiate(this.line2).GetComponent<LineRenderer>();
+        line.SetPosition(0, from - mapSize / 2);
+        line.SetPosition(1, to - mapSize / 2);
+    }
 
 
     RectInt GenerateRoom(Node tree,int n) //나누어준 사각형안에 방을 생성해줍니다.
@@ -190,7 +192,7 @@ public class MapGenerate : MonoBehaviour
         Vector2Int rightCenter=tree.rightNode.center;
 
         //DrawLine_2(new Vector2(leftCenter.x,leftCenter.y),new Vector2(rightCenter.x,leftCenter.y));
-       // DrawLine_2(new Vector2(rightCenter.x,leftCenter.y),new Vector2(rightCenter.x,rightCenter.y));
+        //DrawLine_2(new Vector2(rightCenter.x,leftCenter.y),new Vector2(rightCenter.x,rightCenter.y));
         DrawTileLine(new Vector2Int(leftCenter.x, leftCenter.y), new Vector2Int(rightCenter.x, leftCenter.y));
         DrawTileLine(new Vector2Int(rightCenter.x, leftCenter.y), new Vector2Int(rightCenter.x, rightCenter.y));
 
@@ -198,14 +200,14 @@ public class MapGenerate : MonoBehaviour
         GenerateLoad(tree.rightNode,n+1);
 
     }
-    //void DrawRectangle(RectInt rect)
-    //{
-    //    LineRenderer line=Instantiate(roomLine).GetComponent<LineRenderer>();
-    //    line.SetPosition(0,new Vector2(rect.x,rect.y)-mapSize/2);
-    //    line.SetPosition(1,new Vector2(rect.x+rect.width,rect.y)-mapSize/2);
-    //    line.SetPosition(2,new Vector2(rect.x+rect.width,rect.y+rect.height)-mapSize/2);
-    //    line.SetPosition(3,new Vector2(rect.x,rect.y+rect.height)-mapSize/2);
-    //}
+    void DrawRectangle(RectInt rect)
+    {
+        LineRenderer line = Instantiate(roomLine).GetComponent<LineRenderer>();
+        line.SetPosition(0, new Vector2(rect.x, rect.y) - mapSize / 2);
+        line.SetPosition(1, new Vector2(rect.x + rect.width, rect.y) - mapSize / 2);
+        line.SetPosition(2, new Vector2(rect.x + rect.width, rect.y + rect.height) - mapSize / 2);
+        line.SetPosition(3, new Vector2(rect.x, rect.y + rect.height) - mapSize / 2);
+    }
 
     void DrawTileLine(Vector2Int from,Vector2Int to)
     {
