@@ -219,7 +219,6 @@ GameObject:
   - component: {fileID: 541050342}
   - component: {fileID: 541050341}
   - component: {fileID: 541050343}
-  - component: {fileID: 541050344}
   - component: {fileID: 541050345}
   m_Layer: 0
   m_Name: Player
@@ -227,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &541050341
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -316,19 +315,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &541050344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541050340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22471fc21d0fba346be83d4a1f93f60f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 400
 --- !u!61 &541050345
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -454,6 +440,24 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 1878553127322833933, guid: 77b741dc33024a847938db8d0a876570, type: 3}
   m_PrefabInstance: {fileID: 117403335}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &824246008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1443123823733109115, guid: 77b741dc33024a847938db8d0a876570, type: 3}
+  m_PrefabInstance: {fileID: 117403335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &824246011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824246008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a126d8fb9f59f24b98f4b3dad6856e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMoveSpeed: 5
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,4 +727,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cdb5df0d113bd7b4baffb7e7dc3b462c, type: 2}
   - {fileID: 11400000, guid: 14e35acebd8ec324696e9d930fe364df, type: 2}
   - {fileID: 11400000, guid: ba16135a6c24921489ccaa98030fc779, type: 2}
-  debugflag: 1
+  astar: {fileID: 824246011}
+  playerTr: {fileID: 541050342}
+  debugflag: 0
