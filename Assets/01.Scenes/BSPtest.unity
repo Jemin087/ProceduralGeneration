@@ -457,7 +457,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a126d8fb9f59f24b98f4b3dad6856e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoveSpeed: 5
+  tilemap: {fileID: 798446552}
+  groundTile:
+  - {fileID: 11400000, guid: 67c367e6660b7f74087afb953fc8e9e9, type: 2}
+  - {fileID: 11400000, guid: 2a0e8278c74a0794a867e88a2918bea5, type: 2}
+  - {fileID: 11400000, guid: 7171bdfb5efdfad49910550b8be5c20e, type: 2}
+  playerTr: {fileID: 541050342}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +732,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cdb5df0d113bd7b4baffb7e7dc3b462c, type: 2}
   - {fileID: 11400000, guid: 14e35acebd8ec324696e9d930fe364df, type: 2}
   - {fileID: 11400000, guid: ba16135a6c24921489ccaa98030fc779, type: 2}
-  astar: {fileID: 824246011}
-  playerTr: {fileID: 541050342}
   debugflag: 0

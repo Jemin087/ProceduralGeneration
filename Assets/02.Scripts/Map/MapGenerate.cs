@@ -68,24 +68,14 @@ public class MapGenerate : MonoBehaviour
     [SerializeField]
     Tile[] objectTiles;
 
-
-    [SerializeField]
-    Astar astar;
-
-    [SerializeField]
-    Transform playerTr;
-
+   
     public bool debugflag = false;
     Node root;
-
-
-
 
 
     private void Start()
     {
         root = new Node(new RectInt(0, 0, mapSize.x, mapSize.y));
-       
         if (!debugflag)
         {
             DrawTileBackGround();
@@ -93,6 +83,10 @@ public class MapGenerate : MonoBehaviour
             GenerateRoom(root, 0);
             GenerateLoad(root, 0);
         }
+
+     
+
+   
     }
 
 
@@ -119,12 +113,8 @@ public class MapGenerate : MonoBehaviour
                 GenerateLoad(root, 0);
             }
         }
-        else if(Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2Int targetPos = new Vector2Int(Mathf.RoundToInt(mousePos.x), Mathf.RoundToInt(mousePos.y));
-            MovePlayer(targetPos);
-        }
+   
+        
     }
 
 
@@ -174,7 +164,10 @@ public class MapGenerate : MonoBehaviour
 
             rect = new RectInt(x, y, width, height);
             //DrawRectangle(rect);
+           
             DrawTileRoom(rect);
+
+     
         }
         else
         {
@@ -200,10 +193,10 @@ public class MapGenerate : MonoBehaviour
 
         GenerateLoad(tree.leftNode, n + 1);
         GenerateLoad(tree.rightNode, n + 1);
-        if(n==0)
-        {
-            playerTr.position = new Vector3(leftCenter.x,leftCenter.y,0);
-        }
+        //if(n==0)
+        //{
+            
+        //}
       
 
     }
@@ -315,29 +308,5 @@ public class MapGenerate : MonoBehaviour
 
 
 
-    void MovePlayer(Vector2Int targetPos)
-    {
-        Vector2Int playerPos = new Vector2Int(Mathf.RoundToInt(playerTr.position.x), Mathf.RoundToInt(playerTr.position.y));
-        Debug.Log(playerPos + "target : " + targetPos);
-        List<Vector2Int> path = astar.FindPath(playerPos, targetPos);
-        Debug.Log("count ; " + path.Count);
-        if (path != null && path.Count > 0)
-        {
-
-            StartCoroutine(MoveAlongPath(path));
-        }
-    }
-
-    IEnumerator MoveAlongPath(List<Vector2Int> path)
-    {
-        foreach (Vector2Int pos in path)
-        {
-            Vector3 targetPosition = new Vector3(pos.x, pos.y, 0);
-            while (playerTr.position != targetPosition)
-            {
-                playerTr.position = Vector3.MoveTowards(playerTr.position, targetPosition,astar.playerMoveSpeed * Time.deltaTime);
-                yield return null;
-            }
-        }
-    }
+   
 }
