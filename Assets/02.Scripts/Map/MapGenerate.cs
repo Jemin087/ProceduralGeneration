@@ -68,14 +68,16 @@ public class MapGenerate : MonoBehaviour
     [SerializeField]
     Tile[] objectTiles;
 
-   
+
     public bool debugflag = false;
     Node root;
+
 
 
     private void Start()
     {
         root = new Node(new RectInt(0, 0, mapSize.x, mapSize.y));
+
         if (!debugflag)
         {
             DrawTileBackGround();
@@ -83,16 +85,11 @@ public class MapGenerate : MonoBehaviour
             GenerateRoom(root, 0);
             GenerateLoad(root, 0);
         }
-
-     
-
-   
     }
 
 
     private void Update()
     {
-      
         if (debugflag)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -113,8 +110,6 @@ public class MapGenerate : MonoBehaviour
                 GenerateLoad(root, 0);
             }
         }
-   
-        
     }
 
 
@@ -164,10 +159,7 @@ public class MapGenerate : MonoBehaviour
 
             rect = new RectInt(x, y, width, height);
             //DrawRectangle(rect);
-           
             DrawTileRoom(rect);
-
-     
         }
         else
         {
@@ -185,7 +177,8 @@ public class MapGenerate : MonoBehaviour
 
         Vector2Int leftCenter = tree.leftNode.center;
         Vector2Int rightCenter = tree.rightNode.center;
-
+        
+        
         //DrawLine_2(new Vector2(leftCenter.x,leftCenter.y),new Vector2(rightCenter.x,leftCenter.y));
         //DrawLine_2(new Vector2(rightCenter.x,leftCenter.y),new Vector2(rightCenter.x,rightCenter.y));
         DrawTileLine(new Vector2Int(leftCenter.x, leftCenter.y), new Vector2Int(rightCenter.x, leftCenter.y));
@@ -193,25 +186,30 @@ public class MapGenerate : MonoBehaviour
 
         GenerateLoad(tree.leftNode, n + 1);
         GenerateLoad(tree.rightNode, n + 1);
-        //if(n==0)
+        //if (n == 0)
         //{
-            
+        //    Vector2Int entranceLeft = new Vector2Int(leftCenter.x, leftCenter.y);
+        //    Vector2Int entranceRight = new Vector2Int(rightCenter.x, leftCenter.y);
+
+        //    DrawTileLine(new Vector2Int(leftCenter.x, leftCenter.y), entranceLeft);
+        //    DrawTileLine(new Vector2Int(rightCenter.x, leftCenter.y), entranceRight);
         //}
-      
 
     }
     void DrawTileLine(Vector2Int from, Vector2Int to)
     {
         for (int x = from.x; x < to.x; x++)
         {
-            tilemap.SetTile(new Vector3Int(x - mapSize.x / 2, to.y - mapSize.y / 2, 0), groundTiles[0]);
+             tilemap.SetTile(new Vector3Int(x - mapSize.x / 2, to.y - mapSize.y / 2, 0), groundTiles[0]);
         }
         for (int y = from.y; y < to.y; y++)
         {
-            tilemap.SetTile(new Vector3Int(to.x - mapSize.x / 2, y - mapSize.y / 2, 0), groundTiles[0]);
+             tilemap.SetTile(new Vector3Int(to.x - mapSize.x / 2, y - mapSize.y / 2, 0), groundTiles[0]);
+         
         }
 
     }
+
 
 
     void DrawTileWall(Vector2Int from, Vector2Int to)
@@ -305,8 +303,4 @@ public class MapGenerate : MonoBehaviour
         }
 
     }
-
-
-
-   
 }

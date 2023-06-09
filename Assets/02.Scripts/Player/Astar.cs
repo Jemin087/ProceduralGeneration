@@ -162,10 +162,10 @@ public class Astar : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2Int targetPos = new Vector2Int(Mathf.RoundToInt(mousePos.x), Mathf.RoundToInt(mousePos.y));
 
-            // 타일맵에서 클릭한 위치를 타일 좌표로 변환합니다.
+            
             Vector3Int clickedTile = tilemap.WorldToCell(mousePos);
             targetTile = tilemap.GetTile(clickedTile) as Tile;
-            // FindPath 함수를 호출하여 최단 경로를 찾습니다.
+      
             FindPath(new Vector2Int((int)playerTr.position.x, (int)playerTr.position.y), targetPos);
             currentPathIndex = 0;
         }
